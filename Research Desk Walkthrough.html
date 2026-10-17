@@ -1,0 +1,280 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Research Desk Walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout concept: a single scrolling case study, read top to bottom, with a
+   sticky step rail down the side on wide screens that collapses to a numbered
+   strip on phones. Each step is a two-part row — what to notice, then the
+   screenshot that shows it — so the explanation and the evidence sit together. */
+:root{
+  --paper:#fcfdfc;
+  --card:#ffffff;
+  --mist:#f1f6f4;
+  --line:#e4ebe8;
+  --ink:#293530;
+  --ink-2:#5c6965;
+  --ink-3:#828e8a;
+  --accent:#5c9484;
+  --accent-tint:#eef5f2;
+  --mark:#e08a5f;
+  --mark-tint:#fcf0e8;
+  --font-display:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --font-ui:"Hanken Grotesk",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111815;
+    --card:#17211d;
+    --mist:#1c2a24;
+    --line:#2a3a33;
+    --ink:#edf3ef;
+    --ink-2:#aebab4;
+    --ink-3:#7f8c86;
+    --accent:#6fae9b;
+    --accent-tint:#1d3129;
+    --mark:#e98257;
+    --mark-tint:#3a241b;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111815;
+  --card:#17211d;
+  --mist:#1c2a24;
+  --line:#2a3a33;
+  --ink:#edf3ef;
+  --ink-2:#aebab4;
+  --ink-3:#7f8c86;
+  --accent:#6fae9b;
+  --accent-tint:#1d3129;
+  --mark:#e98257;
+  --mark-tint:#3a241b;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--paper)}
+body{
+  margin:0;color:var(--ink);font:16px/1.6 var(--font-ui);-webkit-font-smoothing:antialiased;
+  padding-left:max(16px, env(safe-area-inset-left,0px));
+  padding-right:max(16px, env(safe-area-inset-right,0px));
+}
+.wrap{max-width:900px;margin:0 auto}
+a{color:var(--accent)}
+img{max-width:100%}
+code{font:500 .85em var(--font-mono);background:var(--mist);padding:.1em .4em;border-radius:5px}
+::selection{background:var(--mark-tint)}
+
+/* Masthead */
+header.masthead{padding-block:40px 24px;border-bottom:1px solid var(--line)}
+.eyebrow{font:600 .72rem/1 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--mark);margin:0 0 14px}
+h1{font:600 clamp(1.9rem,4.6vw,2.7rem)/1.12 var(--font-display);margin:0 0 14px;letter-spacing:-.01em;text-wrap:balance}
+.dek{font-size:1.08rem;line-height:1.6;color:var(--ink-2);max-width:62ch;margin:0 0 18px}
+.dek b{color:var(--ink);font-weight:600}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px 10px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-size:.82rem;color:var(--ink-2)}
+.pill b{color:var(--ink)}
+
+/* Intro / recap cards */
+section.intro{padding-block:28px}
+.howcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:grid;gap:10px}
+.howcard h2{font:600 1.05rem/1.3 var(--font-ui);margin:0}
+.howcard ol{margin:0;padding-left:1.2em;display:grid;gap:5px;color:var(--ink-2)}
+.howcard ol b{color:var(--ink)}
+
+/* Steps */
+section.step{padding-block:44px;border-top:1px solid var(--line);scroll-margin-top:64px}
+.step-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.step-num{flex:none;width:34px;height:34px;border-radius:50%;background:var(--mark);color:#fff;display:grid;place-items:center;font:700 1rem/1 var(--font-mono)}
+.step-head h2{font:600 clamp(1.25rem,2.6vw,1.55rem)/1.25 var(--font-display);margin:4px 0 0;text-wrap:balance}
+.step-body{margin:0 0 20px;max-width:64ch;color:var(--ink-2);font-size:1.02rem}
+.step-body b{color:var(--ink)}
+figure.shot{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card);box-shadow:0 1px 2px rgba(20,30,28,.05),0 8px 24px rgba(20,30,28,.06);cursor:zoom-in}
+figure.shot img{display:block;width:100%;height:auto}
+figcaption{font-size:.82rem;color:var(--ink-3);padding:10px 14px;border-top:1px solid var(--line);display:flex;gap:8px;align-items:center}
+figcaption .dot{width:7px;height:7px;border-radius:50%;background:var(--mark);flex:none}
+.callout{margin-top:14px;display:flex;gap:10px;align-items:flex-start;background:var(--accent-tint);border-radius:10px;padding:12px 14px;font-size:.92rem;color:var(--ink-2)}
+.callout b{color:var(--ink)}
+.callout .ico{flex:none;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--card);display:grid;place-items:center;font:700 .74rem/1 var(--font-mono);margin-top:1px}
+
+/* Reference + closing */
+section.ref{padding-block:36px;border-top:1px solid var(--line)}
+.ref h2{font:600 1.25rem/1.3 var(--font-display);margin:0 0 14px}
+.syntax{display:grid;gap:10px}
+.syn-row{display:grid;grid-template-columns:minmax(140px,220px) 1fr;gap:4px 16px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line)}
+.syn-row:last-child{border-bottom:0}
+.syn-row code{font-size:.84rem}
+.syn-row span{color:var(--ink-2);font-size:.92rem}
+
+section.cta{padding-block:40px 60px;border-top:1px solid var(--line)}
+.cta-card{background:var(--accent);color:#fff;border-radius:16px;padding:28px 26px;display:grid;gap:10px}
+.cta-card h2{font:600 1.4rem/1.3 var(--font-display);margin:0}
+.cta-card p{margin:0;color:#e4efeb;max-width:56ch;line-height:1.6}
+.cta-card .btnrow{margin-top:6px;display:flex;flex-wrap:wrap;gap:10px}
+.btn{appearance:none;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:10px 16px;font:600 .92rem/1 var(--font-ui);text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn.solid{background:#fff;color:var(--accent);border-color:#fff}
+.btn:hover{background:rgba(255,255,255,.18)}
+.btn.solid:hover{background:#f3f7f5}
+
+footer{padding-block:24px 48px;color:var(--ink-3);font-size:.82rem;border-top:1px solid var(--line)}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(10,14,13,.82);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:100%;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox .close{position:fixed;top:max(18px, env(safe-area-inset-top,0px));right:max(18px, env(safe-area-inset-right,0px));width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:1.3rem;line-height:1;cursor:pointer}
+
+@media (max-width:640px){
+  .step-head{gap:10px}
+  .step-num{width:28px;height:28px;font-size:.88rem}
+  .syn-row{grid-template-columns:1fr}
+}
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Journal Research Desk · Walkthrough</p>
+    <h1>Finding what the Desk knows about one topic</h1>
+    <p class="dek">The <a href="https://claude.ai/code/artifact/04d36231-8eb2-4eeb-963b-9847ae5c5aab" target="_blank" rel="noopener">Research Desk</a> holds every post from eight blogs, 2015 to 2026. This walks through one real search, start to finish — narrowing <b>3,238 posts down to a short reading list</b> on <b>the draft and the Vietnam War</b> — so the same eight moves work for any topic you bring to it.</p>
+    <div class="meta-row">
+      <span class="pill">8 steps</span>
+      <span class="pill"><b>3,238</b> &rarr; <b>33</b> &rarr; <b>3</b> posts</span>
+      <span class="pill">Search &middot; Tag filter &middot; Export</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="intro">
+  <div class="howcard">
+    <h2>The shape of a search</h2>
+    <ol>
+      <li><b>Type</b> what you're after in the search box — the library narrows and ranks itself.</li>
+      <li><b>Follow a tag</b> on a promising result to turn a loose match into an exact filter.</li>
+      <li><b>Check off</b> what's worth keeping, then <b>export</b> it as a reading list.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="step" id="step-1">
+  <div class="step-head"><span class="step-num">1</span><h2>Start on the Search tab</h2></div>
+  <p class="step-body">This is the whole library, unfiltered: <b>3,238 posts</b> across <b>8 blogs</b>, 2015 to 2026. The search box sits at the top of the results column, and the filters — years, age range, tag, sort, and which blogs to include — run down the left.</p>
+  <figure class="shot" onclick="openLightbox('img/01-landing.png')">
+    <img src="img/01-landing.png" alt="The Research Desk's Search tab on first load, showing the search box, filter panel, and the first unfiltered results." loading="lazy">
+    <figcaption><span class="dot"></span>Every search starts here — nothing has been typed or filtered yet.</figcaption>
+  </figure>
+</section>
+
+<section class="step" id="step-2">
+  <div class="step-head"><span class="step-num">2</span><h2>Type what you're looking for</h2></div>
+  <p class="step-body">Typing <code>Vietnam War</code> narrows the library from 3,238 posts down to <b>186</b> — everything that mentions it, ranked by how well it matches, with the matching words marked in the title and summary of each result.</p>
+  <figure class="shot" onclick="openLightbox('img/02-type-query.png')">
+    <img src="img/02-type-query.png" alt="The search box filled with Vietnam War, with the result count dropped to 186 posts and matching words highlighted." loading="lazy">
+    <figcaption><span class="dot"></span>The search box (1) and the new result count (2) — both update as you type.</figcaption>
+  </figure>
+  <div class="callout"><span class="ico">i</span><div><b>186 is still a lot to read.</b> The next move isn't typing more words into the box — it's following something a result already offers.</div></div>
+</section>
+
+<section class="step" id="step-3">
+  <div class="step-head"><span class="step-num">3</span><h2>Spot a tag worth following</h2></div>
+  <p class="step-body">One of the matching posts, about a 1967 broadcast where Robert Kennedy and Ronald Reagan took student questions on the war, carries six tags. One of them is <code>draft resistance</code>. Every tag on every result is clickable — it's a shortcut to every other post that carries the same one.</p>
+  <figure class="shot" onclick="openLightbox('img/03-spot-tag.png')">
+    <img src="img/03-spot-tag.png" alt="A close-up of one result card with its tags, with the draft resistance tag outlined." loading="lazy">
+    <figcaption><span class="dot"></span>The <code>draft resistance</code> tag, about to be clicked.</figcaption>
+  </figure>
+</section>
+
+<section class="step" id="step-4">
+  <div class="step-head"><span class="step-num">4</span><h2>Click the tag to filter precisely</h2></div>
+  <p class="step-body">Clicking the <code>draft resistance</code> tag clears the free-text search box and replaces it with an exact filter: <b>Tag: draft resistance</b>. The count drops from 186 to the <b>33 posts</b> actually carrying that tag — a tighter, more reliable set than any wording of a search would give. The active filter shows as a small chip reading "Tag: draft resistance," with an <b>&times;</b> at its right edge — click that <b>&times;</b> to remove the filter and see every post again.</p>
+  <figure class="shot" onclick="openLightbox('img/04-tag-filter-applied.png')">
+    <img src="img/04-tag-filter-applied.png" alt="The result list after clicking the tag, showing the Tag: draft resistance filter chip and 33 posts." loading="lazy">
+    <figcaption><span class="dot"></span>The filter chip (1) and the narrowed count (2).</figcaption>
+  </figure>
+</section>
+
+<section class="step" id="step-5">
+  <div class="step-head"><span class="step-num">5</span><h2>Read a result card</h2></div>
+  <p class="step-body">Before opening anything, each card gives enough to judge it: the <b>title</b>, which <b>blog</b> it ran on and the <b>date</b> and <b>read time</b>, a suggested <b>age range</b>, a short <b>summary</b> with the search terms marked, and the full set of <b>tags</b> — useful for finding the next thread to pull.</p>
+  <figure class="shot" onclick="openLightbox('img/05-read-a-result.png')">
+    <img src="img/05-read-a-result.png" alt="A single result card labeled with its title, metadata, summary, and tags." loading="lazy">
+    <figcaption><span class="dot"></span>Title (1), metadata (2), summary (3), tags (4).</figcaption>
+  </figure>
+</section>
+
+<section class="step" id="step-6">
+  <div class="step-head"><span class="step-num">6</span><h2>Build a reading list</h2></div>
+  <p class="step-body">The checkbox beside each title adds it to a reading list. Three posts are checked here — a Richmond, Indiana conference on the draft; a retirement reflection; and a short piece called "War and Peace." The <b>Selected &amp; Export</b> tab in the top bar keeps a running count across <i>every page</i> of results, not just the one on screen.</p>
+  <figure class="shot" onclick="openLightbox('img/06-select-results.png')">
+    <img src="img/06-select-results.png" alt="Three result checkboxes checked, with the Selected and Export tab showing a count of 3." loading="lazy">
+    <figcaption><span class="dot"></span>Three checked boxes (1&ndash;3) and the matching tab count (4).</figcaption>
+  </figure>
+</section>
+
+<section class="step" id="step-7">
+  <div class="step-head"><span class="step-num">7</span><h2>Open Selected &amp; Export</h2></div>
+  <p class="step-body">The chosen posts are listed on the left, each removable with its &times;. On the right: a <b>format</b> (rich text, Markdown, plain text, or CSV), what to <b>include</b> — summaries, blog and date, tags, age range — and how to <b>order</b> the list.</p>
+  <figure class="shot" onclick="openLightbox('img/07-export-tab.png')">
+    <img src="img/07-export-tab.png" alt="The Selected and Export tab, with the list of three chosen posts and the format, include, and order options." loading="lazy">
+    <figcaption><span class="dot"></span>The selected list (1) and the export options (2).</figcaption>
+  </figure>
+</section>
+
+<section class="step" id="step-8">
+  <div class="step-head"><span class="step-num">8</span><h2>Preview, then copy or download</h2></div>
+  <p class="step-body">The preview shows exactly what will leave the Desk — titles linked back to the original posts, with the web address underneath each one. <b>Copy</b> puts it on the clipboard, ready to paste into an email, a document, or a new post. <b>Download file</b> saves it to the computer instead.</p>
+  <figure class="shot" onclick="openLightbox('img/08-preview-export.png')">
+    <img src="img/08-preview-export.png" alt="The rendered reading-list preview with Copy and Download file buttons beneath it." loading="lazy">
+    <figcaption><span class="dot"></span>The finished preview (1) and the two ways to take it with you (2).</figcaption>
+  </figure>
+</section>
+
+<section class="ref">
+  <h2>Search syntax, at a glance</h2>
+  <div class="syntax">
+    <div class="syn-row"><code>mutual aid</code><span>Words must all appear somewhere in the post — title, tags, or body.</span></div>
+    <div class="syn-row"><code>"Dakota Access"</code><span>Quotes search for the exact phrase, in that order.</span></div>
+    <div class="syn-row"><code>-Iowa</code><span>A minus sign in front of a word leaves posts with it out.</span></div>
+    <div class="syn-row"><code>Tag: draft resistance</code><span>Clicking any tag chip replaces the search with that exact tag.</span></div>
+    <div class="syn-row"><code>Years / Age</code><span>Narrow further by publication year or suggested youth-group age, in the left panel.</span></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="cta-card">
+    <h2>Try it on your own topic</h2>
+    <p>Swap "Vietnam War" for whatever you're after — a place, a person, an event. Search broadly first, then follow a tag that looks promising, the same way this walkthrough did.</p>
+    <div class="btnrow">
+      <a class="btn solid" href="https://claude.ai/code/artifact/04d36231-8eb2-4eeb-963b-9847ae5c5aab" target="_blank" rel="noopener">Open the Research Desk</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">Research Desk Walkthrough &middot; a companion to Journal Research Desk</div></footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="close" aria-label="Close" onclick="closeLightbox(event)">&times;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src){
+  var lb = document.getElementById('lightbox');
+  var img = document.getElementById('lightbox-img');
+  img.src = src;
+  lb.classList.add('open');
+}
+function closeLightbox(e){
+  if(e) e.stopPropagation();
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeLightbox();
+});
+</script>
